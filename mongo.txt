@@ -1,0 +1,49 @@
+1--Create a collection named orders.
+
+db.createCollection('orders');
+
+
+2--Insert at least 3 documents that represent an order. IMPORTANT: See section below for fields.
+
+var orders = db.orders;
+
+orders.insert({orderDate: Date(), orderTotal: 5, lineItems: {unitPrice: 7, quantity: 2, productName: 'Widget'}});
+orders.insert({orderDate: Date(), orderTotal: 9, lineItems: {unitPrice: 25, quantity: 7, productName: 'Stuffs'}});
+orders.insert({orderDate: Date(), orderTotal: 1, lineItems: {unitPrice: 2, quantity: 19, productName: 'Things'}});
+
+orders.find();
+
+
+3--Find a single order document, any order document.
+
+var orders = db.orders;
+
+orders.find({_id: ObjectId("5a296f8f00891a6b0b4d54cb")});
+
+
+4--Find all orders and make them look pretty.
+
+var orders = db.orders;
+
+orders.find().pretty();
+
+
+5--Find all orders with an orderDate that is prior to 1/1/2016.
+
+var orders = db.orders;
+
+orders.find({orderDate: {$lt: "2016-01-01"}}).pretty();
+
+
+6--Find all orders with an orderDate that is after 1/1/2016.
+
+var orders = db.orders;
+
+orders.find({orderDate: {$gt: "2016-01-01"}}).pretty();
+
+
+7--Find orders with lineItems that have a quantity that is less than 50, but greater than 5.
+
+var orders = db.orders;
+
+orders.find({lineItems: {quantity: {$gt: 5}}}).pretty();
